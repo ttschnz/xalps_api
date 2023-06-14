@@ -3,7 +3,7 @@
 - [Rust and Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
 
 further dependencies: 
-`apt install -y protobuf-compiler pkg-config libssl-dev`
+`apt install -y protobuf-compiler pkg-config libssl-dev protobuf-compiler`
 
 ### Test
 `cargo test`
