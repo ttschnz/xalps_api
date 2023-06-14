@@ -3,8 +3,8 @@ syntax = "proto2";
 package track_response;
 
 message ApiTrackResponse {
-  required int32 athleteId = 1;
-  repeated ApiTrackPoint trackPoints = 2;
+  required int32 athlete_id = 1;
+  repeated ApiTrackPoint track_points = 2;
 }
 
 message ApiTrackPoint {
@@ -12,8 +12,8 @@ message ApiTrackPoint {
   required float lat = 2;
   required float lng = 3;
   required float altitude = 4;
-  required float altitudeAgl = 5;
+  required float altitude_agl = 5;
   optional string status = 6;
   required float speed = 7;
-  required float verticalSpeed = 8;
+  required float vertical_speed = 8;
 }
