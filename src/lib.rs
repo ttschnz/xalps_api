@@ -1,3 +1,3 @@
 mod status;
 
-pub use status::{ApiTrackResponse, Overview, RaceStatus, RaceStatusReplay};
+pub use status::{ApiTrackResponse, AthleteSummary, Overview, RaceStatus, RaceStatusReplay};

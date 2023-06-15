@@ -1,10 +1,12 @@
 mod overview;
 mod race_status;
+mod summary;
 mod track_response;
 
 pub use self::{
     overview::Overview,
     race_status::{RaceStatus, RaceStatusReplay},
+    summary::AthleteSummary,
     track_response::ApiTrackResponse,
 };
 

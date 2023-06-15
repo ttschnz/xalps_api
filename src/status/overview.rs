@@ -5,13 +5,13 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Overview {
     #[serde(rename = "3dModels")]
-    three_dimensional_models: ThreeDimensionalModels,
-    athlete_status: Url,
-    athletes: Vec<Athlete>,
-    clock_dates: DateRange,
-    news: News,
-    race_dates: DateRange,
-    turnpoints: Vec<TurnPoint>,
+    pub three_dimensional_models: ThreeDimensionalModels,
+    pub athlete_status: Url,
+    pub athletes: Vec<Athlete>,
+    pub clock_dates: DateRange,
+    pub news: News,
+    pub race_dates: DateRange,
+    pub turnpoints: Vec<TurnPoint>,
 }
 
 impl Overview {
@@ -25,7 +25,7 @@ impl Overview {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct ThreeDimensionalModels {
+pub struct ThreeDimensionalModels {
     map_icons: Url,
     paraglider: Url,
     status_icons: Url,
@@ -33,83 +33,82 @@ struct ThreeDimensionalModels {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct Athlete {
-    athlete_id: String,
-    bio_url: String,
-    chute_color: HexColor,
-    chute_strings: HexColor,
-    country_code: CountryCode,
-    firstname: String,
-    firstname_short: String,
-    guy_bg_color: HexColor,
-    guy_outlines: HexColor,
-    hide: bool,
-    lastname: String,
-    lt_slug: String,
-    marker_bg_color: HexColor,
-    marker_border_color: HexColor,
-    nationality: String,
-    news: Url,
-    nightpasses_count: usize,
-    portrait: Url,
-    portrait_retina: Url,
-    ranking_portrait: Url,
-    ranking_portrait_retina: Url,
-    status_bg_color: HexColor,
-    team: String,
-    text_color: HexColor,
-    track_color: HexColor,
+pub struct Athlete {
+    pub athlete_id: String,
+    pub bio_url: String,
+    pub chute_color: HexColor,
+    pub chute_strings: HexColor,
+    pub country_code: CountryCode,
+    pub firstname: String,
+    pub firstname_short: String,
+    pub guy_bg_color: HexColor,
+    pub guy_outlines: HexColor,
+    pub hide: bool,
+    pub lastname: String,
+    pub lt_slug: String,
+    pub marker_bg_color: HexColor,
+    pub marker_border_color: HexColor,
+    pub nationality: String,
+    pub news: Url,
+    pub nightpasses_count: usize,
+    pub portrait: Url,
+    pub portrait_retina: Url,
+    pub ranking_portrait: Url,
+    pub ranking_portrait_retina: Url,
+    pub status_bg_color: HexColor,
+    pub team: String,
+    pub text_color: HexColor,
+    pub track_color: HexColor,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct DateRange {
+pub struct DateRange {
     end_time: usize,
     start_time: usize,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct News {
-    latest: Url,
-    list: Url,
+pub struct News {
+    pub latest: Url,
+    pub list: Url,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct TurnPoint {
-    id: String,
-    altitude: usize,
-    altitude_on_mesh: usize,
-    caption: String,
-    country: String,
-    country_code: CountryCode,
-    cylinderradius: usize,
-    dist_to_goal: f64,
-    header: String,
-    hidden: Option<bool>,
-    img: Url,
-    img_retina: Url,
-    lat: f64,
-    leg_dist: f64,
-    lng: f64,
-    lt_slug: String,
-
-    polygon: Option<String>,
-    sponsor_img: Option<Url>,
-    sponsor_img_retina: Option<Url>,
-    sponsor_url: Option<Url>,
-    sponsors: Option<Vec<Sponsor>>,
-    tot_dist: f64,
-    visible_on_map: bool,
-    weather: Url,
+pub struct TurnPoint {
+    pub id: String,
+    pub altitude: usize,
+    pub altitude_on_mesh: usize,
+    pub caption: String,
+    pub country: String,
+    pub country_code: CountryCode,
+    pub cylinderradius: usize,
+    pub dist_to_goal: f64,
+    pub header: String,
+    pub hidden: Option<bool>,
+    pub img: Url,
+    pub img_retina: Url,
+    pub lat: f64,
+    pub leg_dist: f64,
+    pub lng: f64,
+    pub lt_slug: String,
+    pub polygon: Option<String>,
+    pub sponsor_img: Option<Url>,
+    pub sponsor_img_retina: Option<Url>,
+    pub sponsor_url: Option<Url>,
+    pub sponsors: Option<Vec<Sponsor>>,
+    pub tot_dist: f64,
+    pub visible_on_map: bool,
+    pub weather: Url,
 }
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-struct Sponsor {
-    sponsor_img: Url,
-    sponsor_img_retina: Url,
-    sponsor_url: Url,
+pub struct Sponsor {
+    pub sponsor_img: Url,
+    pub sponsor_img_retina: Url,
+    pub sponsor_url: Url,
 }
 
 type HexColor = String;
