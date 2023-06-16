@@ -57,6 +57,19 @@ pub enum AthleteStatus {
     Out,
 }
 
+impl AthleteStatus {
+    pub fn verbalize(&self) -> String {
+        match self {
+            AthleteStatus::Rest => "resting",
+            AthleteStatus::Fly => "flying",
+            AthleteStatus::Hike => "hiking",
+            AthleteStatus::Automatic => "<unknown>",
+            AthleteStatus::Out => "is out",
+        }
+        .to_string()
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::{RaceStatus, RaceStatusReplay};

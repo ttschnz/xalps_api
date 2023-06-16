@@ -116,8 +116,8 @@ impl AthleteSummary {
     pub fn get_description(&self) -> String {
         format!("{} ({})", self.full_name, self.team)
     }
-    pub fn get_status(&self) -> AthleteStatus {
-        self.status.clone()
+    pub fn get_status(&self) -> String {
+        self.status.verbalize()
     }
     pub fn get_rank(&self) -> usize {
         self.rank + 1
