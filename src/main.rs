@@ -49,7 +49,7 @@ async fn main() {
                                 row.get_rank()
                             ))
                             .show()
-                            .unwrap();
+                            .unwrap_or(());
                     }
                 } else {
                     row.mark(Change::RankUp);
