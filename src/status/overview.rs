@@ -1,7 +1,7 @@
 use isocountry::CountryCode;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Overview {
     #[serde(rename = "3dModels")]
@@ -23,7 +23,7 @@ impl Overview {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct ThreeDimensionalModels {
     map_icons: Url,
@@ -31,7 +31,7 @@ pub struct ThreeDimensionalModels {
     status_icons: Url,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Athlete {
     pub athlete_id: String,
@@ -61,21 +61,21 @@ pub struct Athlete {
     pub track_color: HexColor,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 #[serde(rename_all = "camelCase")]
 pub struct DateRange {
     end_time: usize,
     start_time: usize,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct News {
     pub latest: Url,
     pub list: Url,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct TurnPoint {
     pub id: String,
@@ -103,7 +103,7 @@ pub struct TurnPoint {
     pub visible_on_map: bool,
     pub weather: Url,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Sponsor {
     pub sponsor_img: Url,

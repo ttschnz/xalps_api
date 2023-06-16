@@ -1,6 +1,6 @@
 mod overview;
 mod race_status;
-mod summary;
+pub mod summary;
 mod track_response;
 
 pub use self::{

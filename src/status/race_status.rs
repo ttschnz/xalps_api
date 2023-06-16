@@ -47,7 +47,7 @@ impl RaceStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Display, Clone, Copy)]
+#[derive(Serialize, Deserialize, Debug, Display, Clone, Copy, PartialEq, Eq)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum AthleteStatus {
     Rest,
