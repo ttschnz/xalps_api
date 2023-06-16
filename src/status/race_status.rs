@@ -1,8 +1,7 @@
-use derive_more::Display;
-
 use chrono::{DateTime, Local};
+use derive_more::Display;
 use serde::{Deserialize, Serialize};
-// GET https://rbxltdata.redbullxalps.com/race/race-status-replay_{yyyy}-{mm}-{dd} => Vec<RaceStatusReplay>
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct RaceStatusReplay {
@@ -34,6 +33,7 @@ pub struct RaceStatus {
     pub status: AthleteStatus,
     pub distance_to_goal: f64,
     pub altitude: usize,
+    pub speed: usize,
 }
 
 impl RaceStatus {

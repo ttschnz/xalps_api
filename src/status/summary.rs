@@ -1,6 +1,6 @@
 use cli_table::{format::Justify, Table};
 
-use crate::{ApiTrackResponse, Overview, RaceStatus};
+use crate::{Overview, RaceStatus};
 
 use super::race_status::AthleteStatus;
 
@@ -11,9 +11,9 @@ pub struct AthleteSummary {
     #[table(title = "Code", justify = "Justify::Left")]
     team: String,
     #[table(title = "Altitude (m.a.s.l)", justify = "Justify::Right")]
-    altitude: SomeOrNaN<f32>,
+    altitude: usize,
     #[table(title = "Speed (km/h)", justify = "Justify::Right")]
-    speed: SomeOrNaN<f32>,
+    speed: usize,
     #[table(title = "Distance from Target (km)", justify = "Justify::Right")]
     distance: f64,
     #[table(title = "Rank", justify = "Justify::Left")]
@@ -49,28 +49,11 @@ impl AthleteSummary {
                     athlete.athlete_id
                 ))?;
 
-            let track_response = ApiTrackResponse::request(&athlete.athlete_id.clone()).await?;
-            let (altitude, speed) =
-                match track_response
-                    .get_track_points()
-                    .iter()
-                    .max_by(|point_a, point_b| {
-                        point_a
-                            .get_timestamp()
-                            .partial_cmp(&point_b.get_timestamp())
-                            .unwrap_or(std::cmp::Ordering::Equal)
-                    }) {
-                    Some(latest_trackpoint) => (
-                        Some(latest_trackpoint.get_altitude()),
-                        Some(latest_trackpoint.get_speed()),
-                    ),
-                    None => (None, None),
-                };
             stati.push(AthleteSummary {
                 full_name: athlete.firstname.clone() + " " + &athlete.lastname,
                 team: athlete.team.clone(),
-                altitude: altitude.into(),
-                speed: speed.into(),
+                altitude: current_status.altitude,
+                speed: current_status.speed,
                 distance: current_status.distance_to_goal,
                 rank: ranking
                     .iter()
@@ -83,24 +66,6 @@ impl AthleteSummary {
         stati.sort_by_key(|athlete_summary| athlete_summary.rank);
 
         Ok(stati)
-    }
-}
-
-#[derive(Debug)]
-pub struct SomeOrNaN<T>(Option<T>);
-
-impl std::fmt::Display for SomeOrNaN<f32> {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self.0 {
-            Some(value) => write!(f, "{:.2}", value),
-            None => write!(f, "NaN"),
-        }
-    }
-}
-
-impl<T> From<Option<T>> for SomeOrNaN<T> {
-    fn from(option: Option<T>) -> Self {
-        SomeOrNaN(option)
     }
 }
 
