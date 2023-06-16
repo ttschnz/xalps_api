@@ -93,16 +93,34 @@ impl AthleteSummary {
             Change::NoChange => {}
         }
     }
-    pub fn mark_if_changed(&mut self, other: &AthleteSummary, tendency: Option<Ordering>) {
+    pub fn mark_if_changed(&mut self, other: &AthleteSummary, tendency: Option<Ordering>) -> bool {
         match self.rank.cmp(&other.rank) {
-            Ordering::Greater => self.mark(Change::RankUp),
-            Ordering::Less => self.mark(Change::RankDown),
-            _ => match tendency {
-                Some(Ordering::Greater) => self.mark(Change::TendencyUp),
-                Some(Ordering::Less) => self.mark(Change::TendencyDown),
-                _ => self.mark(Change::NoChange),
-            },
+            Ordering::Greater => {
+                self.mark(Change::RankUp);
+                true
+            }
+            Ordering::Less => {
+                self.mark(Change::RankDown);
+                true
+            }
+            _ => {
+                match tendency {
+                    Some(Ordering::Greater) => self.mark(Change::TendencyUp),
+                    Some(Ordering::Less) => self.mark(Change::TendencyDown),
+                    _ => self.mark(Change::NoChange),
+                };
+                false
+            }
         }
+    }
+    pub fn get_description(&self) -> String {
+        format!("{} ({})", self.full_name, self.team)
+    }
+    pub fn get_status(&self) -> AthleteStatus {
+        self.status.clone()
+    }
+    pub fn get_rank(&self) -> usize {
+        self.rank + 1
     }
 }
 

@@ -1,5 +1,6 @@
 use clearscreen;
 use cli_table::{print_stdout, WithTitle};
+use notify_rust::Notification;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 use xalps::{summary::Change, AthleteSummary, Overview};
@@ -8,6 +9,7 @@ use xalps::{summary::Change, AthleteSummary, Overview};
 async fn main() {
     let mut last_summary: Option<Vec<AthleteSummary>> = None;
     let overview = Overview::request().await.unwrap();
+    let interest_code = "SUI1";
 
     loop {
         let start_time = Instant::now();
@@ -31,11 +33,24 @@ async fn main() {
                     .iter()
                     .find(|last_row| last_row.team == row.team)
                 {
-                    row.mark_if_changed(
+                    if (row.mark_if_changed(
                         last_row,
                         (row.distance - current_top_distance)
                             .partial_cmp(&(last_row.distance - last_top_distance)),
-                    );
+                    ) || last_row.get_status() != row.get_status())
+                        && row.team == interest_code
+                    {
+                        Notification::new()
+                            .summary("X-Alps")
+                            .body(&format!(
+                                "{}: {} on position {}",
+                                row.get_description(),
+                                row.get_status(),
+                                row.get_rank()
+                            ))
+                            .show()
+                            .unwrap();
+                    }
                 } else {
                     row.mark(Change::RankUp);
                 }

@@ -13,6 +13,7 @@ clearscreen = { version = "2.0.1", features = ["windows-console"] }
 cli-table = "0.4.7"
 derive_more = "0.99.17"
 isocountry = "0.3.2"
+notify-rust = "4.8.0"
 protobuf = "2.28.0"
 protoc="2.28.0"
 reqwest = { version = "0.11.18", features = ["json"] }
