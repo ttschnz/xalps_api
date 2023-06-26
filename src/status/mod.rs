@@ -91,9 +91,11 @@ impl ApiTrackResponse {
     /// The track data of the whole race with a low resolution
     /// ## Example
     /// ```rust
+    /// # tokio_test::block_on(async {
     /// use xalps::ApiTrackResponse;
-    /// let response = ApiTrackResponse::request_reduced("29");
+    /// let response = ApiTrackResponse::request_reduced("29").await;
     /// assert!(response.is_ok());
+    /// # });
     /// ````
     pub async fn request_reduced(
         athlete_id: &str,
